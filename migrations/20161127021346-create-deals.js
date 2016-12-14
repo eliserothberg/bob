@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       revenue: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       month: {
         type: Sequelize.INTEGER

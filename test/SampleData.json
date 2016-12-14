@@ -30,3 +30,6 @@
   ["100648","57114e15e4b021319e914f54","Dick Clark Productions Voting Two Year License","Deal Won (100%)","56be7dbae4b0cc328745bd12","Lindsey Hale",0,10,"2015-05-22","2015-10-30","License/Bundle Deal","Entertainment","New Business","Voting (Digital or Social)","USA"  ],
   ["100649","57114e15e4b021319e914f55","Facebook: Eminem Uploader","Deal Won (100%)","56bd0646e4b0242a36b5558a","Chandler Huston",25000,12,"2015-11-13","2015-12-08","A La Carte Project","Entertainment","New Business","Digital/Social Widgets","USA"  ]
 ]
+
+//only operate on the JSON but download it with keys
+// one test file per source file do a file per test

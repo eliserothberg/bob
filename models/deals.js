@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     dealStatus: DataTypes.STRING,
     salesperson: DataTypes.STRING,
     salesName: DataTypes.STRING,
-    revenue: DataTypes.STRING,
+    revenue: DataTypes.INTEGER,
     month: DataTypes.INTEGER,
     createDate: DataTypes.DATE,
     closeDate: DataTypes.DATE,
