@@ -1,3 +1,3 @@
 var auth = process.env.authKEY;
-console.log("auht key = " + auth);
+console.log("key.js auth key = " + auth);
 module.exports = auth;
