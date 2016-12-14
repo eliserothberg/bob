@@ -1,0 +1,107 @@
+<div class="login-info well header-right">
+    <a href="/users/sign-out">
+        <div id="myBtn2" class="button_base b05_3d_roll">
+            <div>Log Out</div>
+            <div>Log Out</div>
+        </div>
+    </a>
+    {{!-- <a href="/users/sign-out">
+    <button type="button" class="btn btn-primary">Log Out</button>
+    </a> --}}
+
+</div>
+<!---//END BUTTON DIV--->
+
+<!---- //END HEADER---->
+
+{{#if logged_in}}
+<form action="/people/create" method="POST">
+<input type="text" name="name">
+
+<input type="submit">
+</form>
+{{/if}}
+
+{{#unless logged_in}}
+{{/unless}}
+
+
+<ul>
+{{#each people}}
+<li>
+{{this.name}}
+{{#if ../logged_in}}
+    <a href="/people/{{this.id}}/destroy">
+        destroy</a>
+{{/if}}
+<ul>
+    {{#if ../logged_in}}
+        <li>
+            <form action="/people/{{this.id}}/tasks/create" method="POST" style="display: inline">
+                <input type="text" name="task" placeholder="add task here">
+                <input type="submit" value "assign task">
+            </form>
+        </li>
+    {{/if}}
+
+    {{#each this.Tasks }}
+        <li>
+            {{this.task}}
+            {{#if ../../logged_in}}
+                <a href="/people/{{this.person_id}}/tasks/{{this.id}}/destroy">destroy</a>
+            {{/if}}
+        </li>
+    {{/each}}
+</ul>
+</li>
+{{/each}}
+</ul>
+
+<div class="formWrapper">
+<form class="create-update-form" id="signin" action="/graph/salesByMonth" method="POST">
+  <div class="col-2">
+    <label>
+      StartDate
+      <input type="text" id="em" tabindex="2" name="startDate" required>
+    </label>
+  </div>
+  <div class="col-2">
+    <label>
+      EndDate
+      <input type="text" tabindex="3" id="pass" name="endDate" required>
+    </label>
+  </div>
+  <button class="button_base b05_3d_roll" type="submit">
+      <div>Graph</div>
+      <div>Sales-By-Month</div>
+    </div>
+    </button>
+</form>
+</div>
+
+<!-----SLIDE BANNER---->
+<div class="well slide-banner row" id="slogan">
+<div class="slide-banner-left col-md-6">
+<span></span>
+
+<!-- Site content goes here !-->
+
+
+<!--//READ MORE MODAL-->
+<div class="modal fade" id="myModal3" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+{{!-- <h4 class="modal-title"><span class="redText">e</span><span="greenText">Minder</span></h4> --}}
+</div>
+<div class="modal-body">
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</body>
