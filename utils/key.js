@@ -61,9 +61,11 @@ return rp(getNum)
       return totalRecords.reduce(function(initial, following) {
       return initial.concat(following.objects);
     },[]);
+          console.log("totalRecords = " + totalRecords[0])   
+
   })
    .catch(function (err) {
-    console.log("error in API call")  
+    console.log("error in API call") 
   })
 }
 

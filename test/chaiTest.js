@@ -5,7 +5,7 @@
 // var rp = require('request-promise');
 // var Deals = require('../models')["Deals"];
 // var Salespeople = require('../models')["Salespeople"];
-var theList = require('../utils/key2.js');
+var getList = require('../utils/key2.js');
 // var options = require('../utils/key.js');
 // var totalRecords = require('../utils/key.js');
 var getData = require('../utils/key.js');
@@ -20,7 +20,7 @@ var server = require('../server.js');
 var should = chai.should();
 var expect = require('chai').expect;
 var chaiHttp = require('chai-http');
-// var categories = require('./categories.json');
+var categories = require('./categories.json');
 var sampleData = require('./sampleData.json');
 var medianDealSize = require("../lib/medianDealSize.js");
 var monthlySalesByPerson=require("../lib/monthlySalesByPerson.js");
@@ -32,8 +32,13 @@ var salesByMonth=require("../lib/salesByMonth.js");
 var sqlrtrvl=require("../lib/sqlrtrvl.js");
 var Deals = require('../models')["Deals"];
 var router = require('../routes/routes');
+var allData = require('../lib/salesData.js');
 
 
+// console.log("sampleData = " + JSON.stringify(sampleData));
+var x = JSON.stringify(getList);
+console.log("\nsampleData = " + getList.theList);
+console.log("sampleData.fields[0] = " + x.res.body);
 
 'use strict';
 
@@ -43,6 +48,7 @@ var router = require('../routes/routes');
 
 
 chai.use(chaiHttp);
+
 
 // describe('getDeals', () => {
     
@@ -64,88 +70,91 @@ chai.use(chaiHttp);
 
 // });
 
-describe('getOrElse', function(err, res, category) {
-  it('should get title of "Campaigns"', function () {
-    console.log("category.fields[12].name = " + category.fields[12].name);
+
+// describe('allData', function(x) {
+//   it('should get title of "Campaigns"', function () {
+//     console.log("category.fields[12].name = " + [0]);
 
 
-      expect(theList(category.title)).to.equal('Campaigns')
-  });
-  it('should get "Vertical" field', function () {
-      expect(theList(category.fields[12].name)).to.equal('Vertical')
-  });
-});
+//       expect(allData(x.title)).to.equal('Campaigns')
+//   });
+//   it('should get "Vertical" field', function () {
+//       expect(categor(category.fields[12].name)).to.equal('Vertical')
+//           console.log("category.fields[12].name = " + category.fields[12].name);
 
-describe('getOrElse', function(err, res, category) {
-  it('should get title of "Campaigns"', function () {
-    console.log("category.fields[12].name = " + category.fields[12].name);
+//   });
+// });
 
-
-      expect(theList(category.title)).to.equal('Campaigns')
-  });
-  it('should get "Vertical" field', function () {
-      expect(theList(category.fields[12].name)).to.equal('Vertical')
-  });
-});
-
-describe('getOrElse', function(err, res, category) {
-  it('should get title of "Campaigns"', function () {
-    console.log("category.fields[12].name = " + category.fields[12].name);
+// describe('getOrElse', function(err, res, category) {
+//   it('should get title of "Campaigns"', function () {
+//     console.log("category.fields[12].name = " + category.fields[12].name);
 
 
-      expect(theList(category.title)).to.equal('Campaigns')
-  });
-  it('should get "Vertical" field', function () {
-      expect(theList(category.fields[12].name)).to.equal('Vertical')
-  });
-});
+//       expect(theList(category.title)).to.equal('Campaigns')
+//   });
+//   it('should get "Vertical" field', function () {
+//       expect(theList(category.fields[12].name)).to.equal('Vertical')
+//   });
+// });
 
-describe('getData', function(totalRecords) {
-  it('should be an object', function () {
-      expect(getData(totalRecords)).to.be.a('Object')
-    });
-  it('should be unix', function () {
-      expect(getData(totalRecords.process_close_date)).to.be.a('unix')
-    });
-  });
-describe('medianDealSize', function(attributes, searches, startDate, endDate) {
-  it('should give median deal size', function() {
-    var deals=[100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
-    var median = deals[Math.floor(deals.length/2)];
-      expect(median).to.equal(600)
-    });
-  });
-describe('maxMinRevenue', function(attributes, searches, startDate, endDate) {
+// describe('getOrElse', function(err, res, category) {
+//   it('should get title of "Campaigns"', function () {
+//     console.log("category.fields[12].name = " + category.fields[12].name);
 
-  it('should give max and min revenue', function() {
+
+//       expect(theList(category.title)).to.equal('Campaigns')
+//   });
+//   it('should get "Vertical" field', function () {
+//       expect(theList(category.fields[12].name)).to.equal('Vertical')
+//   });
+// });
+
+// describe('getData', function(totalRecords) {
+//   it('should be an object', function () {
+//       expect(getData(totalRecords)).to.be.a('Object')
+//     });
+//   it('should be unix', function () {
+//       expect(getData(totalRecords.process_close_date)).to.be.a('unix')
+//     });
+//   });
+// describe('medianDealSize', function() {
+//   it('should give median deal size', function() {
+//     var deals=[100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+//     var median = deals[Math.floor(deals.length/2)];
+//       expect(median).to.equal(600)
+//     });
+//   });
+// describe('maxMinRevenue', function() {
+
+//   it('should give max and min revenue', function() {
   
-  expect(maxMinRevenue()).to.equal()
-  });
-});
-  it('should list sales total by salesman');
-  it('should show total ytd sales by salesperson');
-  it('should show total ytd sales by salesperson');
-  it('should show quota per salesperson');
-  it('should show monthly sales figures');
-  it('should show seasonal/quarterly sales figures');
-  it('should show monthly sales per salesperson');
-  it('should show seasonal sales per salesperson');
-  it('should show yearly sales per salesperson (if applicable)');
-  it('should show average sales during company tenure (if applicable)');
-  it('should show type of new business- monthly');
-  it('should show type of new business- quarterly');
-  it('should show type of new business- yearly');
-  it('should show Sales cycles (time between open and close)');
-  it('should show shortest sales cycle with revenue figures');
-  it('should show highest revenue deals');
-  it('should show highest revenue deals and sales cycle');
-  it('should show lowest revenue deals');
-  it('should show lowest revenue deals and sales cycle');
-  it('should show salesperson with highest revenue deals');
-  it('should show salesperson with highest revenue deals and sales cycle');
-  it('should show salesperson with lowest revenue deals'); 
-  it('should show salesperson with lowest revenue deals and sales cycle');
-  it('should show revenue per product line');
+//   expect(maxMinRevenue()).to.equal()
+//   });
+// });
+//   it('should list sales total by salesman');
+//   it('should show total ytd sales by salesperson');
+//   it('should show total ytd sales by salesperson');
+//   it('should show quota per salesperson');
+//   it('should show monthly sales figures');
+//   it('should show seasonal/quarterly sales figures');
+//   it('should show monthly sales per salesperson');
+//   it('should show seasonal sales per salesperson');
+//   it('should show yearly sales per salesperson (if applicable)');
+//   it('should show average sales during company tenure (if applicable)');
+//   it('should show type of new business- monthly');
+//   it('should show type of new business- quarterly');
+//   it('should show type of new business- yearly');
+//   it('should show Sales cycles (time between open and close)');
+//   it('should show shortest sales cycle with revenue figures');
+//   it('should show highest revenue deals');
+//   it('should show highest revenue deals and sales cycle');
+//   it('should show lowest revenue deals');
+//   it('should show lowest revenue deals and sales cycle');
+//   it('should show salesperson with highest revenue deals');
+//   it('should show salesperson with highest revenue deals and sales cycle');
+//   it('should show salesperson with lowest revenue deals'); 
+//   it('should show salesperson with lowest revenue deals and sales cycle');
+//   it('should show revenue per product line');
   
 
 

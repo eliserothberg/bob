@@ -1,0 +1,364 @@
+var sinon = require('sinon');
+var chai = require("chai");
+var mocha = require("mocha");
+var connection = require('../connection/connection.js');
+var server = require('../server.js');
+var should = chai.should();
+var expect = require('chai').expect;
+var sampleData = require('./sampleData.json')
+var theList = require('../utils/key2.js');
+var assert = require('assert');
+var PassThrough = require('stream').PassThrough;
+var options = require('../utils/key.js');
+var totalRecords = require('../utils/key.js');
+var getData = require('../utils/key.js');
+var allData = require('../utils/salesData.js');
+
+Here is a mocha test case using mockery. This assumes that the above code is in a file named gh.js.
+
+var sinon = require('sinon')
+  , mockery = require('mockery')
+  , should = require('chai').should();
+
+describe('User Profile', function(){
+  var requestStub, getProfile
+
+  before(function(){
+    mockery.enable({
+      warnOnReplace: false,
+      warnOnUnregistered: false,
+      useCleanCache: true
+    });
+
+    requestStub = sinon.stub();
+
+    // replace the module `request` with a stub object
+    mockery.registerMock('request', requestStub);
+
+    getProfile = require('./gh');
+  });
+
+  after(function(){
+    mockery.disable();
+  });
+
+  it('can get user profile', function(done){
+    requestStub.yields(null, {statusCode: 200}, {login: "bulkan"});
+
+    getProfile('bulkan', function(err, result){
+      if(err) {
+        return done(err);
+      }
+      requestStub.called.should.be.equal(true);
+      result.should.not.be.empty;
+      result.should.have.property('login');
+      done();
+    });
+  });
+})
+
+ 
+describe('getData', function() {
+  beforeEach(function() {
+    this.request = sinon.stub(http, 'request');
+  });
+ 
+  afterEach(function() {
+    http.request.restore();
+  });
+ 
+ 
+  //We will place our tests cases here
+ 
+});
+
+
+describe('saveUser', function() {
+  it('should get correct parameters from the expected URL', function() {
+
+    //We'll stub $.post same as before
+    var post = sinon.stub($, 'post');
+
+    //We'll set up some variables to contain the expected results
+    var expectedUrl = '/users';
+    var expectedParams = {
+      first: 'Expected first name',
+      last: 'Expected last name'
+    };
+
+    //We can also set up the user we'll save based on the expected data
+    var user = {
+      firstname: expectedParams.first,
+      lastname: expectedParams.last
+    }
+
+    saveUser(user, function(){} );
+    post.restore();
+
+    sinon.assert.calledWith(post, expectedUrl, expectedParams);
+  });
+});
+
+// it('should call save once', sinon.test(function() {
+// var save = this.spy(Database, 'save');
+// setupNewUser({ name: 'test' }, function() { });
+// sinon.assert.calledOnce(save);
+// }));
+
+
+// <!DOCTYPE html>
+// <html>
+// <head>
+// <title>Mocha Tests</title>
+// <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+// </head>
+// <body>
+// <div id="mocha"></div>
+// <script src="node_modules/mocha/mocha.js"></script>
+// <script src="node_modules/sinon/pkg/sinon-1.12.2.js"></script>
+// <script src="node_modules/chai/chai.js"></script>
+// <script>mocha.setup('bdd')</script>
+// <script src="myapi.js"></script>
+// <script src="test.js"></script>
+// <script>
+// mocha.run();
+// </script>
+// </body>
+// </html>
+
+var spy = sinon.spy();
+
+//We can call a spy like a function
+spy('Hello', 'World');
+spy("foo");
+spy("bar");
+
+//Now we can get information about the call
+console.log(spy.lastCall.args); //output: ['bar']
+console.log(spy.secondCall.args); //output: ['foo']
+console.log(spy.firstCall.args); //output: ['Hello', 'World']
+
+var stub = sinon.stub();
+
+stub('this is a stub');
+
+console.log(stub.firstCall.args); //output: ['hello']
+
+
+
+// function myFunction(condition, callback){
+//   if(condition){
+//     callback();
+//   }
+// }
+
+// describe('myFunction', function() {
+//   it('should call the callback function', function() {
+//     var callback = sinon.spy();
+
+//     myFunction(true, callback);
+
+//     assert(callback.calledOnce);
+//   });
+// });
+//           -------OR better---------
+
+//           describe('myFunction', function() {
+//   it('should call the callback function', function() {
+//     var callback = sinon.spy();
+
+//     myFunction(true, callback);
+
+//     sinon.assert.calledOnce(callback);
+//   });
+// });
+
+// sinon.assert.calledWith can be used to verify the a function was called with specific parameters (this is probably the one I use most often)
+// sinon.assert.callOrder can verify functions were called in a specific order
+
+// var user = {
+  // ...
+//   setName: function(name){
+//     this.name = name;
+//   }
+// }
+
+// //Create a spy for the setName function
+// var setNameSpy = sinon.spy(user, 'setName');
+
+// //Now, any time we call the function, the spy logs information about it
+// user.setName('Darth Vader');
+
+// //Which we can see by looking at the spy object
+// console.log(setNameSpy.callCount); //output: 1
+
+// //Important final step - remove the spy
+// setNameSpy.restore();
+
+// with sinon we can easily override the behavior of jQuery.ajax by defining a stub in our test framework:
+// sinon.stub(jQuery, 'ajax', function (url, cb) {
+//   if (url === 'http://example.com') {
+//     cb(JSON.stringify({
+//       posts: [
+//         { title: 'Vegan pharetra pellentesque' },
+//         { title: 'Foodie eros maecenas' }
+//       ] 
+//     }));
+//   }
+// });
+
+// pollForPosts();
+
+
+
+ 
+describe('getData', function() {
+  beforeEach(function() {
+    this.request = sinon.stub(http, 'request');
+  });
+ 
+  afterEach(function() {
+    http.request.restore();
+  });
+ 
+ 
+  //We will place our tests cases here
+ 
+});
+
+
+describe('saveUser', function() {
+  it('should get correct parameters from the expected URL', function() {
+
+    //We'll stub $.post same as before
+    var post = sinon.stub($, 'post');
+
+    //We'll set up some variables to contain the expected results
+    var expectedUrl = '/users';
+    var expectedParams = {
+      first: 'Expected first name',
+      last: 'Expected last name'
+    };
+
+    //We can also set up the user we'll save based on the expected data
+    var user = {
+      firstname: expectedParams.first,
+      lastname: expectedParams.last
+    }
+
+    saveUser(user, function(){} );
+    post.restore();
+
+    sinon.assert.calledWith(post, expectedUrl, expectedParams);
+  });
+});
+
+// it('should call save once', sinon.test(function() {
+// var save = this.spy(Database, 'save');
+// setupNewUser({ name: 'test' }, function() { });
+// sinon.assert.calledOnce(save);
+// }));
+
+
+// <!DOCTYPE html>
+// <html>
+// <head>
+// <title>Mocha Tests</title>
+// <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+// </head>
+// <body>
+// <div id="mocha"></div>
+// <script src="node_modules/mocha/mocha.js"></script>
+// <script src="node_modules/sinon/pkg/sinon-1.12.2.js"></script>
+// <script src="node_modules/chai/chai.js"></script>
+// <script>mocha.setup('bdd')</script>
+// <script src="myapi.js"></script>
+// <script src="test.js"></script>
+// <script>
+// mocha.run();
+// </script>
+// </body>
+// </html>
+
+var spy = sinon.spy();
+
+//We can call a spy like a function
+spy('Hello', 'World');
+spy("foo");
+spy("bar");
+
+//Now we can get information about the call
+console.log(spy.lastCall.args); //output: ['bar']
+console.log(spy.secondCall.args); //output: ['foo']
+console.log(spy.firstCall.args); //output: ['Hello', 'World']
+
+var stub = sinon.stub();
+
+stub('this is a stub');
+
+console.log(stub.firstCall.args); //output: ['hello']
+
+
+
+// function myFunction(condition, callback){
+//   if(condition){
+//     callback();
+//   }
+// }
+
+// describe('myFunction', function() {
+//   it('should call the callback function', function() {
+//     var callback = sinon.spy();
+
+//     myFunction(true, callback);
+
+//     assert(callback.calledOnce);
+//   });
+// });
+//           -------OR better---------
+
+//           describe('myFunction', function() {
+//   it('should call the callback function', function() {
+//     var callback = sinon.spy();
+
+//     myFunction(true, callback);
+
+//     sinon.assert.calledOnce(callback);
+//   });
+// });
+
+// sinon.assert.calledWith can be used to verify the a function was called with specific parameters (this is probably the one I use most often)
+// sinon.assert.callOrder can verify functions were called in a specific order
+
+// var user = {
+  // ...
+//   setName: function(name){
+//     this.name = name;
+//   }
+// }
+
+// //Create a spy for the setName function
+// var setNameSpy = sinon.spy(user, 'setName');
+
+// //Now, any time we call the function, the spy logs information about it
+// user.setName('Darth Vader');
+
+// //Which we can see by looking at the spy object
+// console.log(setNameSpy.callCount); //output: 1
+
+// //Important final step - remove the spy
+// setNameSpy.restore();
+
+// with sinon we can easily override the behavior of jQuery.ajax by defining a stub in our test framework:
+// sinon.stub(jQuery, 'ajax', function (url, cb) {
+//   if (url === 'http://example.com') {
+//     cb(JSON.stringify({
+//       posts: [
+//         { title: 'Vegan pharetra pellentesque' },
+//         { title: 'Foodie eros maecenas' }
+//       ] 
+//     }));
+//   }
+// });
+
+// pollForPosts();
